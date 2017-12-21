@@ -3,6 +3,7 @@ package com.kingsoft.wb;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.qq.e.ads.splash.SplashAD;
 import com.qq.e.ads.splash.SplashADListener;
 import com.qq.e.comm.util.AdError;
+import com.umeng.analytics.MobclickAgent;
 
 
 public class LoadingActivity extends Activity implements SplashADListener {
@@ -71,6 +73,15 @@ public class LoadingActivity extends Activity implements SplashADListener {
         fetchSplashAD(this, container, skipView, "1106433744", "4060825855984438", this, 5000);
     }
 
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
     public static String getAppMetaData(Context ctx, String key) {
         if (ctx == null || TextUtils.isEmpty(key)) {
             return null;
@@ -105,6 +116,10 @@ public class LoadingActivity extends Activity implements SplashADListener {
 
 
     private void next() {
+        String msg="ssssssssssssssss";
+        Intent intent = new Intent();
+        intent.setClassName(this, msg);
+        startActivity(intent);
         this.finish();
 
     }
